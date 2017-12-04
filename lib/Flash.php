@@ -1,4 +1,5 @@
 <?php
+
     class Flash {
         private static function set_flash ($msg, $type) {
             $_SESSION['flash'] = array( 'message'=>$msg, 'type'=>$type );

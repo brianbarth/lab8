@@ -27,10 +27,10 @@
         
             while ( $record = $result->fetch() ) {
                
-                $itemInfo = new NewProduct(array( 'id'=>$record[0], 'username'=>$record[1], 'userpassword'=>$record[2] ));
+                $itemInfo = new Users(array( 'id'=>$record[0], 'username'=>$record[1], 'userpassword'=>$record[2] ));
     
                 $info[$itemInfo->id] = $itemInfo;
-            }                      
+            }                  
     
             return $info;  
         }  // end of open()

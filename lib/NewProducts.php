@@ -35,7 +35,7 @@
         return $info;  
     }  // end of open()
 
-    public function remove($hotID) {   
+    public function remove( $hotID ) {   
         self::init_db();
 
         $stment = self::$db->prepare(' delete from products where id=:id' );

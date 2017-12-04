@@ -43,6 +43,22 @@
             </p>
         </form>
     </div>
+    <div> 
+        <h1>List of approved users</h1>
+        <table>
+            <tr>
+                <th>User</th>
+            </tr>            
+            <?php $user = Users::open($_POST); ?>   <!-- populates user table -->
+            <?php foreach ($user as $foo) : ?>
+                <tr>
+                <?php echo "<td>" . $foo->username . "</td>"; ?>                                            
+                <td><span><a href="deleteUser.php?id=<?php echo $foo->id ?>">DEL</a></span></td>
+                </tr>                       
+            <?php endforeach ?>            
+        </table>
+        </div>
+    </div> 
 </main>
 <footer>
     <?php   

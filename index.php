@@ -1,8 +1,12 @@
 <?php
+
     session_start();
     require('lib/NewProducts.php');
     require('lib/Flash.php');
+    require('lib/Authentication.php');
+
     $products = NewProduct::open($info);
+
 ?>
 
 
@@ -17,10 +21,27 @@
 </head>
 <body>
     <header>
+
         <h1>Biag's Store</h1>
-        <a href='new.php'>NEW</a>
-        <a href='login.php'>Login</a>
-        <a href='logout.php'>Logout</a>
+
+        <?php if ( $_SESSION['loggedin'] == true ) : ?>        
+            <a href='new.php'>New</a>
+        <?php endif ?>
+
+        <?php if ( $_SESSION['loggedin'] == true && $_SESSION['superUser'] == true ) : ?>
+            <a href='authentication/addUser.php'>USERS</a>
+        <?php endif ?>
+
+        <?php if ( ! $_SESSION['loggedin'] == true) : ?>
+            <a href='authentication/login.php'>Login</a>
+        <?php else : ?>
+            <a href='authentication/logout.php'>Logout</a>
+        <?php endif ?>
+
+        <?php if ( $_SESSION['loggedin'] == true ) : ?>
+            <p><h4>Logged in as: <?php echo $_SESSION['user']?></h4></p>
+        <?php endif ?>
+
     </header>
     <main>
         <h2>View Products</h2>
@@ -51,14 +72,7 @@
                 echo '</div';
                 unset($_SESSION['flash']);
             } 
-        ?>  
+        ?>
     </footer>
 </body>
 </html>
-
-<!--<a href='delete.php'>DELETE</a>
-<a href='edit.php'>EDIT</a>-->
-
-
-<!--<td><span><a href='delete.php?id=' . $product['id']>DELETE</a></span></td>
-<td><span><a href='edit.php'>EDIT</a></span></td>-->    

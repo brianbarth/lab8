@@ -13,7 +13,7 @@
         
         if (count($errors) == 0) {
 
-            Flash::set_notice("New book created!"); 
+            Flash::set_notice("New item created!"); 
           
             $info = NewProduct::open($info); //open and loads book data 
              

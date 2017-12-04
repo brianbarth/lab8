@@ -1,8 +1,8 @@
 <?php
     session_start();
-    require('../lib/Flash');
-    require('../lib/Users');
-    require('../lib/Authentication');
+    require('../lib/Flash.php');
+    require('../lib/Users.php');
+    require('../lib/Authentication.php');
 
     Authentication::authenticate();
 
@@ -16,7 +16,7 @@
         Flash::set_notice( 'The user was deleted!' );
     }
 
-    $user = Users::open( $user );
+    //$user = Users::open( $user );
 
-    Users::remove( $user );
+    Users::remove( $_GET['id'] );
 ?>

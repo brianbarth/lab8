@@ -9,20 +9,24 @@
 
     $validUser = Users::open( $user );
 
-    if ( isset( $_POST['username'], $_POST['password'])) {
+    if ( isset( $_POST['username'], $_POST['userpassword'] ) ) {
         $bad = true;
-        if ( $_POST['username'] == 'biag' && $_POST['password'] == '1234' ) {
-            $_SESSION['loggedin'] == true;
-            $_SESSION['superUser'] == true;
+        if ( $_POST['username'] == 'biag' && $_POST['userpassword'] == '1234' ) {
+            $_SESSION['loggedin'] = true;
+            $_SESSION['superUser'] = true;
+            $_SESSION['user'] = $_POST['username'];
+        
             Flash::set_notice( 'Hello Biag, you are now logged in!');
             header('location: ../index.php');
             exit;
         }
         if ( $_POST['username'] != 'biag' ) {
             foreach ( $validUser as $foo ) {
-                if ( ( $_POST['username'] == $foo->username ) && ( $_POST['password'] == $foo->password ) ) {
-                    $_SESSION['superUser'] == false;
-                    $_SESSION['loggedin'] == true;
+                if ( ( $_POST['username'] == $foo->username ) && ( $_POST['userpassword'] == $foo->userpassword ) ) {
+                    $_SESSION['superUser'] = false;
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['user'] = $_POST['username'];
+               
                     Flash::set_notice( 'You are now logged in!');
                     header('location: ../index.php');
                     exit;
@@ -56,7 +60,7 @@
                 </p> 
                 <p>
                     <label for 'password'>PASSWORD</label> 
-                    <input type = 'text' name = 'password' value = '' id = 'password'> 
+                    <input type = 'text' name = 'userpassword' value = '' id = 'password'> 
                 </p>
                 <p>
                     <input type = 'submit' value ='Login'> 

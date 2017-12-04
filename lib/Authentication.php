@@ -8,7 +8,7 @@
             } // end of if
         } // end of authenticate
         public static function loggedin() {
-            return isset( $_SESSION['loggedin']) && $_SESSION['loggedin'] == true;
+            return isset( $_SESSION['loggedin'] ) && $_SESSION['loggedin'] == true;
         } // end of loggedin function
     } // end of class
 ?>
