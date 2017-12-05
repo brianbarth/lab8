@@ -28,7 +28,7 @@
 </header>
 <main> 
     <div>
-        <h1>Add an authorized user</h1>
+        <h2>Add an authorized user</h2>
         <form action="addUser.php" method="post">
             <p>
                 <label for="username">Username</label>
@@ -44,7 +44,7 @@
         </form>
     </div>
     <div> 
-        <h1>List of approved users</h1>
+        <h2>List of approved users</h2>
         <table>
             <tr>
                 <th>User</th>

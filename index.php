@@ -38,6 +38,10 @@
             <a href='authentication/logout.php'>Logout</a>
         <?php endif ?>
 
+        <?php if ( sizeof($_SESSION['cart'] ) > 1 ) : ?>
+            <a href='shoppingCart.php'>View Cart</a>
+        <?php endif ?>
+
         <?php if ( $_SESSION['loggedin'] == true ) : ?>
             <p><h4>Logged in as: <?php echo $_SESSION['user']?></h4></p>
         <?php endif ?>
@@ -57,8 +61,16 @@
                     <td><?php echo $product->itemname ?></td>
                     <td><?php echo $product->description ?></td>
                     <td><?php echo $product->price ?></td>
+
+                    <?php if ( $_SESSION['loggedin'] ) : ?>
                     <td><span><a href='delete.php?id=<?php echo $product->id; ?>'>DELETE</a></span></td>
-                    <td><span><a href='edit.php?id=<?php echo $product->id; ?>'>EDIT</a></span></td>        
+                    <td><span><a href='edit.php?id=<?php echo $product->id; ?>'>EDIT</a></span></td>
+                    <?php endif ?>
+
+                    <?php if ( ! $_SESSION['loggedin'] ) : ?> 
+                    <td><span><a href ='addToCart.php?id=<?php echo $product->id; ?>'>ADD TO CART</a></span></td>
+                    <?php endif ?>
+
                 </tr>
                 <?php endforeach ?>
             <?php } ?>
