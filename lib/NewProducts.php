@@ -14,7 +14,7 @@
     public function __construct($data = null) {
         if ($data) {
             $this->id = $data['id'];
-            $this->itemname = $data['itemname'];
+            $this->name = $data['name'];
             $this->description = $data['description'];
             $this->price = $data['price'];
         }
@@ -27,7 +27,7 @@
     
         while ( $record = $result->fetch() ) {
            
-            $itemInfo = new NewProduct(array( 'id'=>$record[0], 'itemname'=>$record[1], 'description'=>$record[2], 'price'=>$record[3] ));
+            $itemInfo = new NewProduct(array( 'id'=>$record[0], 'name'=>$record[1], 'description'=>$record[2], 'price'=>$record[3] ));
 
             $info[$itemInfo->id] = $itemInfo;
         }                      
@@ -47,14 +47,14 @@
     }  // end of remove()
 
     public function update( $data ) {
-        $this->itemname = $data['itemname'];
+        $this->name = $data['name'];
         $this->description = $data['description'];
         $this->price = $data['price'];
         
         self::init_db();
         
-        $stment = self::$db->prepare( 'update products set itemname=:itemname, description=:description, price=:price where id=:id'  );
-        $stment->execute( array( 'id' => $this->id, 'itemname' => $this->itemname, 'description' => $this->description, 'price' => $this->price ) );
+        $stment = self::$db->prepare( 'update products set name=:name, description=:description, price=:price where id=:id'  );
+        $stment->execute( array( 'id' => $this->id, 'name' => $this->name, 'description' => $this->description, 'price' => $this->price ) );
 
     } // end of update()
 
@@ -62,7 +62,7 @@
         self::init_db();
         $result = self::$db->query("select * from products where id=$hotID");
         $record = $result->fetch();
-        $info = new NewProduct(array( 'id'=>$record[0], 'itemname'=>$record[1], 'description'=>$record[2], 'price'=>$record[3] ));
+        $info = new NewProduct(array( 'id'=>$record[0], 'name'=>$record[1], 'description'=>$record[2], 'price'=>$record[3] ));
        
         return $info;
     } // end of find()
@@ -71,8 +71,8 @@
 
         $errors = array();
         
-        if (empty($data['itemname'])) {
-            $errors['itemname'] = "Item cannot be left blank!";
+        if (empty($data['name'])) {
+            $errors['name'] = "Item cannot be left blank!";
         }
         if (empty($data['description'])) {
             $errors['description'] = "Description cannot be left blank!";
@@ -90,8 +90,8 @@
     public function append( $info ) {   //function for new product creation
         self::init_db();
 
-        $stment = self::$db->prepare( 'insert into products (itemname, description, price) values (:itemname, :description, :price)' ); // framework for sql statement
-        $stment->execute( array( 'itemname' => $_POST['itemname'], 'description' => $_POST['description'], 'price' => $_POST['price'] ) );
+        $stment = self::$db->prepare( 'insert into products (name, description, price) values (:name, :description, :price)' ); // framework for sql statement
+        $stment->execute( array( 'name' => $_POST['name'], 'description' => $_POST['description'], 'price' => $_POST['price'] ) );
         $lastID = self::$db->lastInsertId();
 
         header( "location: index.php?id=" . $lastID );

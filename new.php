@@ -38,7 +38,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>NewItem</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="style/mystyles.css" type="text/css">
 </head>
@@ -61,26 +61,29 @@
         </div>
         <div class="container">
             <form action='new.php' method='post'>
-            <?php   if ( isset( $errors['itemname'])) {
-                        echo "<div class='form-group id='eb'>";
+            <?php   if ( isset( $errors['name'])) {
+                        echo "<div class='form-group' id='eb'>";
                     } else {
                         echo "<div class='form-group'>";
                     }      
-            ?><label for="itemname">ITEMNAME</label><input class="form-control" type='text' name='itemname' id='itemname' value="<?php echo $_POST['itemname'] ?>">
+            ?>
+            <label for="name">ITEMNAME</label><input class="form-control" type='text' name='name' id='name' value="<?php echo $_POST['name'] ?>">
             </div>
             <?php   if ( isset( $errors['description'])) {
                         echo "<div class='form-group' id='eb'>";
                 } else {
                     echo "<div class='form-group'>";
                 }      
-            ?><label for="description">DESCRIPTION</label><input class="form-control" type='text' name='description' id='description' value="<?php echo $_POST['description'] ?>">
+            ?>
+            <label for="description">DESCRIPTION</label><input class="form-control" type='text' name='description' id='description' value="<?php echo $_POST['description'] ?>">
             </div>
             <?php   if ( isset( $errors['price']) || isset( $errors['number']) ) {
                     echo "<div class='form-group' id='eb'>";
                 } else {
                     echo "<div class='form-group'>";
                 }      
-            ?><label for="price">PRICE</label><input class="form-control" type='text' name='price' id='price' value="<?php echo $_POST['price'] ?>">
+            ?>
+            <label for="price">PRICE</label><input class="form-control" type='text' name='price' id='price' value="<?php echo $_POST['price'] ?>">
             </div>
                 <button class="btn btn-primary" type='submit'>Add</button> 
             </form>

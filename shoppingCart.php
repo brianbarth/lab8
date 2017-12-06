@@ -12,7 +12,7 @@
     }
 
     foreach ( $_SESSION['cart'] as $id => $value ) {
-        $_SESSION['total'] += number_format($products[$value]->price, 2);
+        $_SESSION['total'] += $products[$value]->price;
     }
 
 ?>
@@ -22,7 +22,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>ShoppingCart</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="style/mystyles.css" type="text/css">
 </head>
@@ -60,18 +60,21 @@
             <table class="table table-striped">
                 <tr>
                     <th>Product</th>
-                    <th>Price</th>
+                    <th>Description</th>
+                    <th style="text-align: right">Price</th>
+                    <th>&nbsp;</th>
                 </tr>
                     <?php if ( $_SESSION['cart'] ) : ?>
                     <?php foreach ( $_SESSION['cart'] as $id => $value ) : ?> <!-- iterates through items in cart -->
                     <tr>               
-                        <td><?php echo $products[$value]->itemname ?></td>
-                        <td><?php echo '$ ' . number_format($products[$value]->price, 2); ?></td>
-
-                        <?php if ( $products[$value]->itemname ) : ?>
-                        <td><span><a class="btn btn-primary btn-sm" href='deleteCartItem.php?id=<?php echo $products[$value]->id; ?>'>DELETE</a></span></td>
+                        <td><?php echo $products[$value]->name ?></td>
+                        <td><?php echo $products[$value]->description ?></td>
+                        <td align='right'><?php echo '$ ' . number_format($products[$value]->price, 2); ?></td>
+                        <td align="right">
+                        <?php if ( $products[$value]->name ) : ?>
+                        <span><a class="btn btn-primary btn-sm" href='deleteCartItem.php?id=<?php echo $products[$value]->id; ?>'>DELETE</a></span>
                         <?php endif ?>
-                        
+                        </td>
                     </tr>
                     <?php endforeach ?>
                 <?php endif ?>

@@ -17,7 +17,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Index_Page</title>
+    <title>Index</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="style/mystyles.css" type="text/css">
 </head>
@@ -28,25 +28,26 @@
         <h1>Biag's Store</h1>
             <div class="col-sm-12 text-right">
                 <?php if ( $_SESSION['loggedin'] == true ) : ?>
-                    <p><h6>Logged in as: <?php echo $_SESSION['user']?></h6></p>
+                    <p><h6>Logged in as: <?php echo $_SESSION['user']?></h6><a class="btn btn-outline-primary btn-sm" href="authentication/logout.php">Logout</a></p>
                 <?php endif ?>
             </div>
         </div>
     </div>
     <div class="container">
-        <div id="nav" class="container well-sm text-right" style="background-color: #e3f2fd;">           
-            <?php if ( $_SESSION['loggedin'] == true ) : ?>        
-                <a href='new.php'>New</a>
+        <div id="nav" class="container well-sm text-right" style="background-color: #e3f2fd;">
+        
+            <?php if ( $_SESSION['loggedin'] == true ) : ?>                      
+                <a href='new.php'>New</a>                 
             <?php endif ?>
 
-            <?php if ( $_SESSION['loggedin'] == true && $_SESSION['superUser'] == true ) : ?>
-                <a href='authentication/addUser.php'>USERS</a> 
+            <?php if ( $_SESSION['loggedin'] == true && $_SESSION['superUser'] == true ) : ?>                
+                <a href='authentication/addUser.php'>USERS</a>                   
             <?php endif ?>
 
-            <?php if ( ! $_SESSION['loggedin'] == true) : ?>
-                <a href='authentication/login.php'>Login</a>
-            <?php else : ?>
-                <a href='authentication/logout.php'>Logout</a>
+            <?php if ( ! $_SESSION['loggedin'] == true) : ?>                 
+                    <a href='authentication/login.php'>Login</a> 
+            <?php else : ?>                  
+                <a href='authentication/logout.php'>Logout</a>                   
             <?php endif ?>
 
             <?php if ( sizeof($_SESSION['cart'] ) > 0 ) : ?>
@@ -54,41 +55,51 @@
                     <a href='shoppingCart.php'>View Cart</a>
                 <?php endif ?>
             <?php endif ?>
+    
         </div>
     </div>                                                     
     </header> 
-    <main>
+    <main> 
         <div class="container text-center">
             <h2>Available Products</h2>
             <hr  style="background-color: black; height: 2px;">
-        </div>
+        </div>   
         <div class="container">
             <table class="table table-striped">
                 <tr>
                     <th>Product</th>
                     <th>Description</th>
-                    <th>Price</th>
+                    <th style='text-align: right'>Price</th>
+                    <th>&nbsp;</th>
                 </tr>
                 <?php if ( sizeof($products) > 0 ) { ?>
                     <?php foreach ($products as $product) : ?> <!-- iterates through products array -->
                     <tr>               
-                        <td><?php echo $product->itemname ?></td>
+                        <td><?php echo $product->name ?></td>
                         <td><?php echo $product->description ?></td>
-                        <td><?php echo '$ ' . number_format($product->price, 2); ?></td>
-
+                        <td align='right'><?php echo '$ ' . number_format($product->price, 2); ?></td>
+                        <td align='right'>
                         <?php if ( $_SESSION['loggedin'] ) : ?>
-                        <td><span><a class="btn btn-primary btn-sm" href='delete.php?id=<?php echo $product->id; ?>'>DEL</a></span></td>
-                        <td><span><a class="btn btn-primary btn-sm" href='edit.php?id=<?php echo $product->id; ?>'>EDIT</a></span></td>
+                        <span><a class="btn btn-primary btn-sm" href='delete.php?id=<?php echo $product->id; ?>'>DEL</a></span>
+                        <span><a class="btn btn-primary btn-sm" href='edit.php?id=<?php echo $product->id; ?>'>EDIT</a></span>
                         <?php endif ?>
 
                         <?php if ( ! $_SESSION['loggedin'] ) : ?> 
-                        <td><span><a class="btn btn-primary btn-sm" href ='addToCart.php?id=<?php echo $product->id; ?>'>ADD</a></span></td>
+                        <span><a class="btn btn-primary btn-sm" href ='addToCart.php?id=<?php echo $product->id; ?>'>ADD</a></span>
                         <?php endif ?>
+                        </td>
                     </tr>
                     <?php endforeach ?>
                 <?php } ?>
             </table>
-        </div>          
+            <?php if ( ! $products ) : ?>
+            <div class="container">
+                <div class='alert alert-danger text-center' role='alert'>
+                    <p>We're sorry, we're sold out right now. Please try back after items are added!</p>
+                </div>
+            </div>    
+            <?php endif ?>
+        </div>
     </main>
     <footer>
     <?php if ($_SESSION['flash']['type'] == 'alert' ) : ?>

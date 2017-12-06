@@ -15,7 +15,7 @@
         array_push($_SESSION['cart'], $passedID );
     }
 
-    $name = $products[$passedID]->itemname;
+    $name = $products[$passedID]->name;
 
     Flash::set_notice( $name . ' has been added to cart!');
     header( 'location: index.php?id=' . $_GET['id'] );

@@ -20,14 +20,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>AddUser</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="style/mystyles.css" type="text/css">
 </head>
 <header>
     <div class="container">
         <div class="jumbotron text-center">
-        <h1>Biag's Store</h1>
+        <h1>Biag's Store *Admin*</h1>
         </div>
     </div>
     <div class="container">
@@ -48,7 +48,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input class="form-control" type="password" name="userpassword" value="" id="userpassword">
+                <input class="form-control" type="password" name="password" value="" id="password">
             </div>
                 <button  class="btn btn-primary" type="submit">Add</button>        
         </form>
@@ -61,6 +61,7 @@
         <table class="table table-striped">
             <tr>
                 <th>User</th>
+                <th>&nbsp;</th>
             </tr>            
             <?php $user = Users::open($_POST); ?>   <!-- populates user table -->
             <?php foreach ($user as $foo) : ?>

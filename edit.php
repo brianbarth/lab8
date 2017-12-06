@@ -13,7 +13,7 @@
     
     if ( sizeof($errors) == 0 ) {
         $id = $info->id;
-        $itemname = $info->itemname;
+        $name = $info->name;
         $description = $info->description;
         $price = $info->price;                   
     }   
@@ -37,7 +37,7 @@
             echo "</div>";
             echo "</div>";
 
-            $itemname = isset($_POST['itemname']) ? $_POST['itemname'] : null;
+            $name = isset($_POST['name']) ? $_POST['name'] : null;
             $description = isset($_POST['description']) ? $_POST['description'] : null;
             $price = isset($_POST['price']) ? $_POST['price'] : null;
         }
@@ -50,7 +50,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>EditPage</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="style/mystyles.css" type="text/css">
 </head>
@@ -72,24 +72,30 @@
     </div>
     <div class="container">
         <form action="edit.php?id=<?php echo $info->id ?>" method='post'>
-        <?php   if ( isset( $errors['itemname'])) {
-                        echo "<div class='form-group id='eb'>";
+        <?php   if ( isset( $errors['name'])) {
+                        echo "<div class='form-group' id='eb'>";
                     } else {
                         echo "<div class='form-group'>";
                     }
-        ?>ITEM: <input class="form-control" type='text' name='itemname' id='itemname' value="<?php echo $itemname ?>"></p>
+        ?>
+        <label for="name">ITEMNAME</label><input class="form-control" type='text' name='name' id='name' value="<?php echo $name ?>">
+        </div>
         <?php   if ( isset( $errors['description'])) {
-                        echo "<div class='form-group id='eb'>";
+                        echo "<div class='form-group' id='eb'>";
                     } else {
                         echo "<div class='form-group'>";
                     }
-        ?>DESCRIPTION: <input class="form-control" type='text' name='description' id='description' value="<?php echo $description ?>"></p>
-        <?php   if ( isset( $errors['price'])) {
-                        echo "<div class='form-group id='eb'>";
+        ?>
+        <label for="name">DESCRIPTION</label><input class="form-control" type='text' name='description' id='description' value="<?php echo $description ?>">
+        </div>
+        <?php   if ( isset( $errors['price']) || isset( $errors['number']) ) {
+                        echo "<div class='form-group' id='eb'>";
                     } else {
                         echo "<div class='form-group'>";
                     }
-        ?>PRICE: <input class="form-control" type='text' name='price' id='price' value="<?php echo $price ?>"> </p>
+        ?>
+        <label for="name">PRICE</label><input class="form-control" type='text' name='price' id='price' value="<?php echo $price ?>">
+        </div>
             <button class="btn btn-primary" type='submit'>Update</button>
         </form>
     </div>

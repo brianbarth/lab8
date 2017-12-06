@@ -9,9 +9,9 @@
 
     $validUser = Users::open( $user );
 
-    if ( isset( $_POST['username'], $_POST['userpassword'] ) ) {
+    if ( isset( $_POST['username'], $_POST['password'] ) ) {
         $bad = true;
-        if ( $_POST['username'] == 'biag' && $_POST['userpassword'] == '1234' ) {
+        if ( $_POST['username'] == 'biag' && $_POST['password'] == '1234' ) {
             $_SESSION['loggedin'] = true;
             $_SESSION['superUser'] = true;
             $_SESSION['user'] = $_POST['username'];
@@ -22,7 +22,7 @@
         }
         if ( $_POST['username'] != 'biag' ) {
             foreach ( $validUser as $foo ) {
-                if ( ( $_POST['username'] == $foo->username ) && ( $_POST['userpassword'] == $foo->userpassword ) ) {
+                if ( ( $_POST['username'] == $foo->username ) && ( $_POST['password'] == $foo->password ) ) {
                     $_SESSION['superUser'] = false;
                     $_SESSION['loggedin'] = true;
                     $_SESSION['user'] = $_POST['username'];
@@ -41,7 +41,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="style/mystyles.css" type="text/css">
 </head>
@@ -74,7 +74,7 @@
             </div>
             <div class="form-group">
                 <label for 'password'>PASSWORD</label> 
-                <input class="form-control" type = 'password' name = 'userpassword' value = '' id = 'password'> 
+                <input class="form-control" type = 'password' name = 'password' value = '' id = 'password'> 
             </div>
                 <button class="btn btn-primary" type = 'submit'>Login</button>               
             </form>
