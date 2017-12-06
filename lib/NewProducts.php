@@ -68,16 +68,19 @@
     } // end of find()
 
     public function validate($data) {
+
         $errors = array();
         
         if (empty($data['itemname'])) {
             $errors['itemname'] = "Item cannot be left blank!";
         }
         if (empty($data['description'])) {
-            $errors['desceiption'] = "Description cannot be left blank!";
+            $errors['description'] = "Description cannot be left blank!";
         }
         if (empty($data['price'])) {
             $errors['price'] = "Price cannot be left blank!";
+        } else if (! is_numeric($data['price'])) {
+            $errors['number'] = "Price must only be numeric!";
         }
         
         return $errors;
@@ -92,9 +95,9 @@
         $lastID = self::$db->lastInsertId();
 
         header( "location: index.php?id=" . $lastID );
-        exit;      
-    }  //end of append function
+        exit;
 
+    }  //end of append function
 
  } // end of NewProduct class
 ?>

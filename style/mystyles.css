@@ -1,0 +1,7 @@
+#eb input[type=text] {
+    border-color: red;
+}
+#nav a {
+    margin-right: 10px;
+}
+

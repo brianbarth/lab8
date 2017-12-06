@@ -3,10 +3,14 @@
     require('lib/NewProducts.php');
     require('lib/Flash.php');
 
+    if ( ! $_SESSION['cart'] ) {
+        $_SESSION['cart'] = array();
+    }
+    
     $info = array();
     $passedID = $_GET['id'];
     $products = NewProduct::open( $info );
-    //var_dump($products);
+    
     if ( $passedID ) {
         array_push($_SESSION['cart'], $passedID );
     }

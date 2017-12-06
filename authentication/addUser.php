@@ -21,31 +21,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/mystyles.css" type="text/css">
 </head>
 <header>
-    <h1>Biag's Store *Admin*</h1>
-    <a class="home" href="../index.php">Home</a>
+    <div class="container">
+        <div class="jumbotron text-center">
+        <h1>Biag's Store</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div id="nav" class="container well-sm text-right" style="background-color: #e3f2fd;">
+            <a class="home" href="../index.php">Home</a>
+        </div>
+    </div>
 </header>
 <main> 
-    <div>
+    <div class="container">
         <h2>Add an authorized user</h2>
+    </div>
+    <div class="container">
         <form action="addUser.php" method="post">
-            <p>
+            <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" name="username" value="" id="username">
-            </p>
-            <p>
+                <input class="form-control" type="text" name="username" value="" id="username">
+            </div>
+            <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="userpassword" value="" id="userpassword">
-            </p>
-            <p>
-                <input type="submit" value="Add">
-            </p>
+                <input class="form-control" type="password" name="userpassword" value="" id="userpassword">
+            </div>
+                <button  class="btn btn-primary" type="submit">Add</button>        
         </form>
     </div>
-    <div> 
+    <!-- table of approved users -->
+    <div class="container"> 
         <h2>List of approved users</h2>
-        <table>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
             <tr>
                 <th>User</th>
             </tr>            
@@ -53,21 +66,30 @@
             <?php foreach ($user as $foo) : ?>
                 <tr>
                 <?php echo "<td>" . $foo->username . "</td>"; ?>                                            
-                <td><span><a href="deleteUser.php?id=<?php echo $foo->id ?>">DEL</a></span></td>
+                <td><span><a class="btn btn-primary btn-sm" href="deleteUser.php?id=<?php echo $foo->id ?>">DEL</a></span></td>
                 </tr>                       
             <?php endforeach ?>            
         </table>
-        </div>
-    </div> 
+    </div>
 </main>
 <footer>
-    <?php   
-        if (isset($_SESSION['flash'])) {      //  renders flash message 
-            echo '<div class="flash' . $_SESSION['flash']['type'] . '">';
-            echo '<p>' . $_SESSION['flash']['message'] . '</p>';
-            echo '</div';
-            unset($_SESSION['flash']);
-        } 
-    ?> 
+    <?php if ($_SESSION['flash']['type'] == 'alert' ) : ?>
+        <div class='container'>
+        <div class='alert alert-danger text-center'role='alert'>
+    <?php endif ?>
+    <?php if ($_SESSION['flash']['type'] == 'notice' ) : ?>
+        <div class='container'>
+        <div class='alert alert-success text-center' role='alert'> 
+    <?php endif ?>
+        <?php
+            if (isset($_SESSION['flash'])) {             
+                echo '<div class="flash' . $_SESSION['flash']['type'] . '">';
+                echo '<p>' . $_SESSION['flash']['message'] . '</p>';
+                echo '</div';
+                unset($_SESSION['flash']);
+            } 
+        ?>
+        </div>
+        </div>
 </footer>
 </html>
